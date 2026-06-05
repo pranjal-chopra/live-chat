@@ -1,5 +1,7 @@
 import { io } from 'socket.io-client'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || ''
+
 let socket = null
 
 export function getSocket() {
@@ -9,8 +11,8 @@ export function getSocket() {
 export function connectSocket(token) {
   if (socket?.connected) return socket
 
-  socket = io('/', {
-    auth: { token },       // sent to Flask on_connect(auth)
+  socket = io(BACKEND_URL, {
+    auth: { token },
     transports: ['websocket'],
   })
 
