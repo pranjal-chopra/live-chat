@@ -1,5 +1,5 @@
-import eventlet
-eventlet.monkey_patch()  # must be first — patches stdlib for async I/O
+from gevent import monkey
+monkey.patch_all()  # must be first
 
 from app import create_app
 from app.extensions import socketio
@@ -7,4 +7,8 @@ from app.extensions import socketio
 app = create_app("development")
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    from gevent.pywsgi import WSGIServer
+    from geventwebsocket.handler import WebSocketHandler
+    server = WSGIServer(("0.0.0.0", 5000), app, handler_class=WebSocketHandler)
+    print("Server running on http://0.0.0.0:5000")
+    server.serve_forever()

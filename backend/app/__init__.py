@@ -15,7 +15,7 @@ def create_app(config_name="default"):
     socketio.init_app(
         app,
         cors_allowed_origins=app.config["FRONTEND_URL"],
-        async_mode="eventlet"
+        async_mode="gevent"
     )
     jwt.init_app(app)
     bcrypt.init_app(app)
