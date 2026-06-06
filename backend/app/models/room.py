@@ -41,8 +41,9 @@ class Room:
         return db.rooms.find_one({"code": code})
 
     @staticmethod
-    def get_all() -> list[dict]:
-        rooms = list(db.rooms.find().sort("created_at", -1))
+    def get_rooms_for_user(username: str) -> list[dict]:
+        """Only return rooms this user has previously joined."""
+        rooms = list(db.rooms.find({"members": username}).sort("created_at", -1))
         for r in rooms:
             r["_id"] = str(r["_id"])
         return rooms

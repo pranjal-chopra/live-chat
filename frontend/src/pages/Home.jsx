@@ -140,7 +140,7 @@ export default function Home() {
         {/* room list */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-zinc-300">Active rooms</h2>
+            <h2 className="text-sm font-semibold text-zinc-300">Your rooms</h2>
             <button onClick={fetchRooms} className="text-xs text-zinc-500 hover:text-zinc-300 transition">
               Refresh
             </button>
@@ -148,7 +148,7 @@ export default function Home() {
 
           {rooms.length === 0 ? (
             <div className="text-center py-16 text-zinc-600">
-              <p className="text-sm">No rooms yet. Create one above.</p>
+              <p className="text-sm">No rooms yet. Create one or join with a code above.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

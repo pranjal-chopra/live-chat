@@ -7,11 +7,12 @@ from ..models.message import Message
 rooms_bp = Blueprint("rooms", __name__)
 
 
+
 @rooms_bp.route("/", methods=["GET"])
 @jwt_required()
 def get_rooms():
-    """List all rooms."""
-    rooms = Room.get_all()
+    username = get_jwt_identity()
+    rooms = Room.get_rooms_for_user(username)
     return jsonify({"rooms": [Room.to_public(r) for r in rooms]}), 200
 
 
